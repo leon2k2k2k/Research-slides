@@ -6,7 +6,7 @@
 \usepackage{lmodern}
 %\usepackage[mathscr]{euscript}
 % \usepackage[usenames, dvipsnames]{xcolor}
-% \usepackage{mathtools}
+\usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{amsthm}
 %\usepackage{xparse}
@@ -15,8 +15,17 @@
 % \include{preamble.tex}
 % \newcommand{\Diff}{\mathrm{Diff}^+(S^1)}
 
-\newcommand{\mb}{\mathbf}
 
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\newcommand{\mb}{\mathbf}
+\newcommand{\Mfld}{Mfld}
 \newcommand{\iso}{\cong}
 \newcommand{\isoto}{\xrightarrow{\simeq}}
 
@@ -48,7 +57,7 @@
 \newcommand{\GFR}{\Gamma \backslash F / \R}
 \newcommand{\GF}{\Gamma \backslash F}
 \newcommand{\Diff}{\mathrm{Diff}^+(S^1)}
-\newcommand{\Mfld}{Mfld}
+% \newcommand{\Mfld}{Mfld}
 \newcommand{\Witt}{\mathfrak{w}}
 \newcommand{\LieVir}{\mathfrak{vir}}
 % \newcommand{\FGG}(F/G}
@@ -163,17 +172,171 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
 \end{frame}
 
 \begin{frame}
-    \frametitle{Group cohomology}
+    \frametitle{Central extension as group cohomology: I}
     As many other things, central extensions can be classified by cohomology groups: \pause 
     
     \begin{prop}
         Let $G$ be a discrete group, then the isomorphism class of central extensions of $G$ by $A$ is 
-        classified by group cohomology class $H^2(G; A)$.
+        classified by group cohomology class $H^2(G; A) \simeq H^2(BG; A)$, where $BG$ is the 
+        classifying space of $G$.
     \end{prop}
 
-    
+    Given a cocycle class $b \in C^2(G;A)$, viewed as a map $b : G \times G \to A$ 
+    satisying some cocycle conditions. Then $\tilde{G} = G \times A$ as a set, with multiplication 
+    $(g, a) \cdot (g', a') \coloneqq (g \cdot g', a + a' + b(g, g'))$.
 \end{frame}
 
+\begin{frame}
+    \frametitle{Central extension as group cohomology: II}
+    In our case, $\Diff$ is an infinite dimension Frechet Lie group, and we care about 
+    its topology. Smooth $U(1)$ central extensions of Lie groups are \alert{NOT} classified 
+    by ordinary cohomology classes.  \pause \vspace{5mm}
+
+    We need a cohomology theory that remembers the smooth structure. \pause 
+
+    \vspace{5mm} The answer is \alert{differential cohomology}.
+\end{frame}
+
+
+\section{Differential cohomology}
+
+\begin{frame}
+    \frametitle{Sheaves on smooth manifolds}
+    Let $M$ be a manifold, then the ordinary cohomology groups  $H^*(M; A)$ depends 
+    only on the homotopy classes of $M$. It is the cohomology of the constant sheave 
+    $\underline{A}$ on $M$.
+    On the other hand, the $i$-th cohomology form on $M$, $\Omega^i(M)$ is sensitive 
+    to the smooth structure of $M$. \pause \vspace{5mm}
+    
+    We can view both constant sheaves and 
+    differential forms as sheaves on $\Mfld$ the site of smooth manifolds. \pause 
+
+    \vspace{5mm}
+    Even though $\Omega^i$ are not homotopy invariant, the chain complex of sheaves 
+    $\Omega^* = 0 \to \Omega^0 \xrightarrow{d} \Omega^1 \xrightarrow{d} \dots$ is a homotopy invariant,
+    in fact,
+    \begin{theorem}[de Rham]
+        The chain complex $\Omega^*$ is the constant sheave $\R$, as a chain complex concentrated in degree 0.
+    \end{theorem}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sheaves $\Z(n)$}
+    With this in mind, we define the (chain complex of) sheave $\Z(n)$ as 
+    \begin{equation}
+        \Z(n) = \Z \to \Omega^0 \to \Omega^1 \to \dots \to \Omega^{n-1} \to 0.
+    \end{equation} \pause 
+    These sheaves $\Z(n)$ are both sensitive to topology (from $\Z$) and the smooth 
+    structure (from $\Omega^i$). \pause \vspace{5mm}
+
+    There is also a form of integration: let $M$ be a closed oriented $d$-dimensional 
+    manifold, then there is an integration map:
+    \begin{equation}
+        \int_M: H^*(M; \Z(n)) \to H^{*-d}(M; \Z(n-d)).
+    \end{equation}
+    There is also a relative version of this.
+\end{frame}
+
+\begin{frame}
+    \frametitle{$\Z(1)$ and line bundles}
+    For example, a degree cocycle in $C^2(M; \Z(1))$ can be describe as follows:
+    fix an open covering $\{U_i\}$ of $M$, we have $1$-form $\alpha_i$ on 
+    the open subsets $U_i$, and $0$-form $f_{ij}$ on intersections $U_i \cap U_j$, such that 
+    $\alpha_i- \alpha_j = f_{ij}$\pause \vspace{5mm}
+
+    This precisely describe the data of a $U(1)$ principal bundle on $M$!
+    \begin{prop}
+        $H^2(M; \Z(1))$ is the group of isomorphism classes of $U(1)$ principal bundles on $M$.
+    \end{prop}
+
+    Furthermore, $H^2(M; \Z(2))$ is the group of isomorpism classes of $U(1)$ principal bundles with connections on $M$.
+\end{frame}
+
+\begin{frame}
+    \frametitle{$\Z(1)$ and central extensions}
+    While $H^2(-; \Z(1))$ classifies $U(1)$ principal bundle, $H^3(-; \Z(1))$ classifies 
+    $U(1)$ central extensions:
+
+    \begin{theorem}
+        Let $G$ be a smooth (possibly infinite dimensional) Lie group, $BG$ 
+        its classifying space. Then 
+        $H^3(BG; \Z(1))$ classifies smooth central extensions of $G$ by $U(1)$.
+    \end{theorem}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Differential characteristic classes}
+    Let $G$ be a Lie group, and $\Bdot G$ the classifying space. Then $H^*(\Bdot G; \Z)$ 
+    are the characteristic classes of $G$. Similiarly, $H^*(\Bdot G; \Z(n))$ are differential 
+    characeteristic classes of $G$. \pause \vspace{5mm}
+
+    We will  need the following key fact:
+    \begin{theorem}[Bott]
+        $H^4(\Bdot\GL_1^+(\R); \Z(2)) \simeq \R$.
+    \end{theorem}
+\end{frame}
+
+
+\section{Main theorem}
+\begin{frame}
+    \frametitle{Key Idea I}
+    We want to get a $\R$ family of central extension of $\Diff$ by $U(1)$, therefore 
+    we want a $\R$ family in $H^3(\Bdot\Diff, \Z(1))$. We get this by pullback and integration: \pause 
+
+    \vspace{5mm} 
+    Consider the canonical $\Diff$ action on $S^1$, note that 
+    \begin{itemize}
+        \item <1 -> The quotient $S^1/\Diff$ has a map to $\Bdot\Diff = * /\Diff$.
+        Since the action of $\Diff$ on $S^1$ is orientation preserving, this is a oriented 
+        $S^1$ fiber bundle.
+        \item <2 -> The tangent bundle of $S^1$ gives a map $TS^1: S^1 \to \Bdot\GL^+_1(\R)$. Since
+        the action of $\Diff$ on $S^1$ is smooth, the tangent bundle is $\Diff$-equivariant. Equivalently,
+        the tangent bundle factors through the quotient as a map $TS^1: S^1/\Diff \to B\GL^+_1(\R)$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Key Idea II}
+    To summarize, we have a span of maps:
+    \begin{equation}
+        %\label{eqn:transgression_space_diagram}
+        \begin{tikzcd}
+        S^1/\Diff \arrow[r, "TS^1"] \arrow[d]
+        & \Bdot\GL^+_1(\R) \\
+        \Bdot\Gamma.
+        & 
+        \end{tikzcd}
+        \end{equation}
+    Note the vertical map is a $S^1$ fibration, something we can integrate against. 
+
+    Therefore we get a map:
+    \begin{equation}
+        %\label{eqn:transgression_space_diagram}
+        \begin{tikzcd}
+        H^4(S^1/\Diff; \Z(2))  \arrow[d, "\int_{S^1}"]
+        & H^4(\Bdot \GL^+_1(\R); \Z(2)) \arrow[l]\\
+        H^3(\Bdot\Gamma; \Z(1)).
+        & 
+        \end{tikzcd}
+        \end{equation} 
+\end{frame}
+
+\begin{frame}
+    \frametitle{Main theorem}
+    Finally, we can state the conjecture of Freed and Hopkins that we proved: \vspace{5mm}
+    \begin{theorem}[Y.L., Arun Debray, Christoph Weis]
+        The image of map $\R \simeq H^4(\Bdot \GL^+_1(\R); \Z(2)) \to H^3(\Bdot\Diff; \Z(1))$
+        are the Virasoro central extensions $\tGam_\lambda$.
+    \end{theorem}
+
+    \vspace{5mm} Furthermore, we explicitly recovers the Bott-Thurston cocylces when considering the 
+    map on cocycles.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Last slide}
+    \huge Thank you for listening!
+\end{frame}
 % As such they have applications to 
 % \begin{itemize}
 %     \item<1 -> String theory. 2d CFT is the language to describe string worldsheet.
