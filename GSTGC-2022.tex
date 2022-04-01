@@ -1,0 +1,191 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+%\usepackage[mathscr]{euscript}
+% \usepackage[usenames, dvipsnames]{xcolor}
+% \usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{xparse}
+\usepackage{xspace}
+\usepackage{tikz-cd}
+% \include{preamble.tex}
+% \newcommand{\Diff}{\mathrm{Diff}^+(S^1)}
+
+\newcommand{\mb}{\mathbf}
+
+\newcommand{\iso}{\cong}
+\newcommand{\isoto}{\xrightarrow{\simeq}}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\T}{\mathbb T}
+\newcommand{\F}{F}
+\newcommand{\ii}{\mathbf i}
+
+
+\newcommand{\op}{\mathsf{op}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+% \newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Lie}{\mathrm{Lie}}
+\newcommand{\Zn}{\Z(n)}
+\newcommand{\Rn}{\R(n)}
+\newcommand{\Bdot}{B_\bullet}
+\newcommand{\Edot}{E_\bullet}
+\newcommand{\BdotG}{B_\bullet G}
+\newcommand{\EdotG}{E_{\bullet}G}
+\newcommand{\BdotH}{B_\bullet H}
+\newcommand{\BnablaG}{B_\nabla G}
+\newcommand{\EnablaG}{E_\nabla G}
+\newcommand{\BdotGamma}{B_\bullet \Gamma}
+\newcommand{\GFG}{\Gamma \backslash F / G}
+\newcommand{\GFR}{\Gamma \backslash F / \R}
+\newcommand{\GF}{\Gamma \backslash F}
+\newcommand{\Diff}{\mathrm{Diff}^+(S^1)}
+\newcommand{\Mfld}{Mfld}
+\newcommand{\Witt}{\mathfrak{w}}
+\newcommand{\LieVir}{\mathfrak{vir}}
+% \newcommand{\FGG}(F/G}
+
+\newcommand{\point}{\ast}
+\renewcommand{\d}{\mathrm d}
+\newcommand{\ud}{\,\d}
+\newcommand{\tGam}{\widetilde\Gamma}
+\newcommand{\CExt}{\mathrm{CExt}}
+\newcommand{\Map}{\mathrm{Map}}
+
+
+
+
+
+
+\newcommand{\term}{\emph} % e.g. "The \term{trace} is defined to be..."
+
+
+
+\usepackage{microtype}
+\usepackage{hypcap}
+
+\hypersetup{
+ colorlinks,
+ linkcolor={red!50!black},
+ citecolor={green!50!black},
+ urlcolor={blue!80!black}
+}
+
+% make cleveref use the Oxford comma:
+% see https://tex.stackexchange.com/questions/161338
+\newcommand{\creflastconjunction}{, and\nobreakspace}
+
+\newcommand{\TODO}{\textcolor{red}{TODO}}
+
+\newcommand{\cat}{\mathsf}
+\newcommand{\Man}{\cat{Man}}
+\newcommand{\Sh}{\cat{Sh}}
+\newcommand{\Ch}{\cat{Ch}}
+\newcommand{\sSet}{\cat{sSet}}
+
+\newcommand{\Hsm}{H_{\mathrm{SM}}}
+
+\newcommand{\Sym}{\mathrm{Sym}}
+\newcommand{\fg}{\mathfrak g}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\OmegaR}{\Omega^1 \otimes i\R}
+\newcommand{\chern}{(c_1)^\nabla}
+
+\newtheorem{prop}[equation]{Proposition}
+
+
+%Information to be included in the title page:
+\title{Differential Cohomology and Virasoro Central Extensions}
+\author[Yu Leon Liu ]{Yu Leon Liu} % auteur
+\institute[Rouen University]{\textbf {Rouen University}}\institute{Harvard University}
+\date[April 2rd 2022] {April 3rd 2022 \\ \vspace{5mm} Based on [\href{https://arxiv.org/abs/2112.10837}{arXiv:2112.10837}] \\ Joint work 
+with Arun Debray and Christopher Weis}
+
+\begin{document}
+
+\frame{\titlepage}
+
+% toc
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents
+    \end{frame}
+
+
+\section{Motivation}
+\begin{frame}
+\frametitle{Motivation}
+    \alert{Virasoro groups} is a $\mb{R}$ family of central extension of $\Diff$, the group of 
+orientation preserving smooth automorphism of $S^1$. The central extension is describe by the 
+Bott-Thurston cocyle. The goal of this talk is to give a novel geometric description 
+these central extensions, using differential cohomology. thus affirmativaly answering a conjecture of Freed-Hopkins.
+\end{frame}
+
+\section{Virasoro groups and central extensions}
+
+\begin{frame}
+    \frametitle{Bott-Thurston cocycles}
+
+Recall that $\Diff$ is the group of orientation preserving smooth automorphism of $S^1$. 
+It is an infinite-dimensional Frechet Lie group. \pause
+    \begin{definition}
+The Virasoro group $\tGam_\lambda$, for $\lambda \in \mb{R}$, is a $U(1)$ central extension of $\Diff$, described by the \alert{Bott-Thurston cocycle}
+$B_\lambda: \Diff \times \Diff \to U(1)$:
+\begin{equation}
+    B_\lambda(\gamma_1, \gamma_2) = \exp\left(-\frac{i\lambda}{48\pi}\int_{S^1} \log(\gamma_1'
+        \circ\gamma_2) \ud(\log(\gamma_2))'\right)
+\end{equation}
+for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
+\end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Central Extensions}
+    Let's briefly review what is a central extension: \pause
+    \begin{definition}
+        Let $G$ be a group and $A$ be an abelian group, a central extension of $G$
+        by $A$ is a group $\tilde{G}$ with short exact sequence:
+        \begin{eqnarray}
+            0 \to A \to \tilde{G} \to G \to 1
+        \end{eqnarray}
+        such that subgroup $A \subset \tilde{G}$ is in the center, that is, 
+        it commutes with every element of $\tilde{G}$.
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Group cohomology}
+    As many other things, central extensions can be classified by cohomology groups: \pause 
+    
+    \begin{prop}
+        Let $G$ be a discrete group, then the isomorphism class of central extensions of $G$ by $A$ is 
+        classified by group cohomology class $H^2(G; A)$.
+    \end{prop}
+
+    
+\end{frame}
+
+% As such they have applications to 
+% \begin{itemize}
+%     \item<1 -> String theory. 2d CFT is the language to describe string worldsheet.
+%     \item<2 -> Geometric reprensentation theory. 2d CFT is closely related to reprensentation
+%     of affine Kacs-Moody groups/algebras and geometric Langlands.
+%     \item<3 -> Condensed matter physics.  Theories like Wess-Zumino-Wess models many important 
+%     condensed matter sysmtems like (fraction) Quantum Halls.
+%     \item<4 -> Algebraic Geometry of surfaces. 
+% \end{itemize}
+
+
+% table of contents
+
+
+\end{document}
