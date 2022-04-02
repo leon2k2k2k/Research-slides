@@ -54,7 +54,7 @@
 \newcommand{\BdotH}{B_\bullet H}
 \newcommand{\BnablaG}{B_\nabla G}
 \newcommand{\EnablaG}{E_\nabla G}
-\newcommand{\BdotGamma}{B_\bullet \Gamma}
+% \newcommand{\BdotGamma}{B_\bullet \Gamma}
 \newcommand{\GFG}{\Gamma \backslash F / G}
 \newcommand{\GFR}{\Gamma \backslash F / \R}
 \newcommand{\GF}{\Gamma \backslash F}
@@ -71,6 +71,7 @@
 \newcommand{\CExt}{\mathrm{CExt}}
 \newcommand{\Map}{\mathrm{Map}}
 
+\newcommand{\Vir}{\mathrm{Vir}}
 
 
 
@@ -135,10 +136,18 @@ with Arun Debray and Christopher Weis}
 \section{Motivation}
 \begin{frame}
 \frametitle{Motivation}
-    \alert{Virasoro groups} is a $\mb{R}$ family of central extension of $\Diff$, the group of 
-orientation preserving smooth automorphism of $S^1$. The central extension is describe by the 
-Bott-Thurston cocyle. The goal of this talk is to give a novel geometric description 
-these central extensions, using differential cohomology. thus affirmativaly answering a conjecture of Freed-Hopkins.
+\begin{itemize}
+    \item <1 -> The \alert{Virasoro groups} describe space-time symmetries 
+    of 2d CFTs. As such, it is important to physics (string theory, condensed matter) and 
+    mathematics (geometric representation theory).
+    \item <2 -> \alert{Virasoro groups} is a $\mb{R}$ family of central extension of $\Diff$, the group of 
+    orientation preserving smooth automorphism of $S^1$. 
+    \item <3 -> The central extension is describe by the 
+    \alert{Bott-Thurston cocyle}. 
+    \item <4 -> The goal of this talk is to give a novel geometric description 
+    these central extensions, using differential cohomology, affirmativaly answering a conjecture of Freed-Hopkins.
+\end{itemize}
+
 \end{frame}
 
 \section{Virasoro groups and central extensions}
@@ -149,8 +158,8 @@ these central extensions, using differential cohomology. thus affirmativaly answ
 Recall that $\Diff$ is the group of orientation preserving smooth automorphism of $S^1$. 
 It is an infinite-dimensional Frechet Lie group. \pause
     \begin{definition}
-The Virasoro group $\tGam_\lambda$, for $\lambda \in \mb{R}$, is a $U(1)$ central extension of $\Diff$, described by the \alert{Bott-Thurston cocycle}
-$B_\lambda: \Diff \times \Diff \to U(1)$:
+The Virasoro group $\Vir_\lambda$, for $\lambda \in \mb{R}$, is a $U(1)$ central extension of $\Diff$, described by the \alert{Bott-Thurston cocycle}
+$B_\lambda: \Diff \times \Diff \to U(1)$: \pause
 \begin{equation}
     B_\lambda(\gamma_1, \gamma_2) = \exp\left(-\frac{i\lambda}{48\pi}\int_{S^1} \log(\gamma_1'
         \circ\gamma_2) \ud(\log(\gamma_2))'\right)
@@ -181,20 +190,20 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
         Let $G$ be a discrete group, then the isomorphism class of central extensions of $G$ by $A$ is 
         classified by group cohomology class $H^2(G; A) \simeq H^2(BG; A)$, where $BG$ is the 
         classifying space of $G$.
-    \end{prop}
+    \end{prop}\pause
 
     Given a cocycle class $b \in C^2(G;A)$, viewed as a map $b : G \times G \to A$ 
     satisying some cocycle conditions. Then $\tilde{G} = G \times A$ as a set, with multiplication 
-    $(g, a) \cdot (g', a') \coloneqq (g \cdot g', a + a' + b(g, g'))$.
+    $(g, a) \cdot (g', a') \coloneqq (g \cdot g', a + a' + b(g, g'))$. \pause \\
+    The map $\tilde{G} \to G$ is  $(g, a) \mapsto g$.
 \end{frame}
 
 \begin{frame}
     \frametitle{Central extension as group cohomology: II}
-    In our case, $\Diff$ is an infinite dimension Frechet Lie group, and we care about 
-    its topology. Smooth $U(1)$ central extensions of Lie groups are \alert{NOT} classified 
-    by ordinary cohomology classes.  \pause \vspace{5mm}
+    \alert{Problem}:  Smooth $U(1)$ central extensions of nondiscret Lie groups are \alert{NOT} classified 
+    by ordinary cohomology classes. \pause \vspace{5mm}
 
-    We need a cohomology theory that remembers the smooth structure. \pause 
+    We need a cohomology theory that remembers the smooth structures. \pause 
 
     \vspace{5mm} The answer is \alert{differential cohomology}.
 \end{frame}
@@ -211,14 +220,14 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
     to the smooth structure of $M$. \pause \vspace{5mm}
     
     We can view both constant sheaves and 
-    differential forms as sheaves on $\Mfld$ the site of smooth manifolds. \pause 
+    differential forms as sheaves on $\Mfld$, the site of smooth manifolds. \pause 
 
     \vspace{5mm}
     Even though $\Omega^i$ are not homotopy invariant, the chain complex of sheaves 
     $\Omega^* = 0 \to \Omega^0 \xrightarrow{d} \Omega^1 \xrightarrow{d} \dots$ is a homotopy invariant,
     in fact,
     \begin{theorem}[de Rham]
-        The chain complex $\Omega^*$ is the constant sheave $\R$, as a chain complex concentrated in degree 0.
+        The chain complex $\Omega^*$ is the constant sheave $\underline{\R}$, as a chain complex concentrated in degree 0.
     \end{theorem}
 \end{frame}
 
@@ -226,56 +235,62 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
     \frametitle{Sheaves $\Z(n)$}
     With this in mind, we define the (chain complex of) sheave $\Z(n)$ as 
     \begin{equation}
-        \Z(n) = \Z \to \Omega^0 \to \Omega^1 \to \dots \to \Omega^{n-1} \to 0.
+        \Z(n) = \underline{\Z} \to \Omega^0 \to \Omega^1 \to \dots \to \Omega^{n-1} \to 0.
     \end{equation} \pause 
     These sheaves $\Z(n)$ are both sensitive to topology (from $\Z$) and the smooth 
     structure (from $\Omega^i$). \pause \vspace{5mm}
 
-    There is also a form of integration: let $M$ be a closed oriented $d$-dimensional 
+    There is also a form of integration.  let $M$ be a closed oriented $d$-dimensional 
     manifold, then there is an integration map:
     \begin{equation}
-        \int_M: H^*(M; \Z(n)) \to H^{*-d}(M; \Z(n-d)).
+        \int_M: H^*(M; \Z(n)) \to H^{*-d}(*; \Z(n-d)).
     \end{equation}
     There is also a relative version of this.
 \end{frame}
 
 \begin{frame}
-    \frametitle{$\Z(1)$ and line bundles}
-    For example, a degree cocycle in $C^2(M; \Z(1))$ can be describe as follows:
-    fix an open covering $\{U_i\}$ of $M$, we have $1$-form $\alpha_i$ on 
-    the open subsets $U_i$, and $0$-form $f_{ij}$ on intersections $U_i \cap U_j$, such that 
-    $\alpha_i- \alpha_j = f_{ij}$\pause \vspace{5mm}
+    \frametitle{Example: $\Z(1)$ and line bundles}
+    A cocycle in $C^2(M; \Z(1))$ can be describe as follows:
+    fix an open covering $\{U_i\}$ of $M$, we have $0$-form ($\R$-valued functions) $a$ on 
+    the open subsets $U_ij = U_i \cap U_j$, and $\Z$-valued functions $f_{ijk}$ on intersections $U_{ijk}$, such that 
+    $a_{ij} - a_{jk} + a_{ik} = f_{ijk}.$\pause \vspace{5mm}
 
     This precisely describe the data of a $U(1)$ principal bundle on $M$!
     \begin{prop}
         $H^2(M; \Z(1))$ is the group of isomorphism classes of $U(1)$ principal bundles on $M$.
     \end{prop}
 
-    Furthermore, $H^2(M; \Z(2))$ is the group of isomorpism classes of $U(1)$ principal bundles with connections on $M$.
+    Furthermore, $H^2(M; \Z(2))$ is the group of isomorpism classes of $U(1)$ principal bundles with connections on $M$ 
+    (Hint: for the cocycle here we need also $1$-form $\alpha_i$ on $U_i$, with $\alpha_i - \alpha_j = d a_{ij}$).
 \end{frame}
 
 \begin{frame}
     \frametitle{$\Z(1)$ and central extensions}
     While $H^2(-; \Z(1))$ classifies $U(1)$ principal bundle, $H^3(-; \Z(1))$ classifies 
-    $U(1)$ central extensions:
+    $U(1)$ central extensions: \pause
 
     \begin{theorem}
-        Let $G$ be a smooth (possibly infinite dimensional) Lie group, $BG$ 
+        Let $G$ be a smooth (possibly infinite dimensional) Lie group, $\BdotG$ 
         its classifying space. Then 
         $H^3(BG; \Z(1))$ classifies smooth central extensions of $G$ by $U(1)$.
-    \end{theorem}
+    \end{theorem} \pause 
+
+    $\BdotG$ is the classifying space of $G$, viewed as a sheave on $Mfld$.
+
 \end{frame}
 
 \begin{frame}
     \frametitle{Differential characteristic classes}
-    Let $G$ be a Lie group, and $\Bdot G$ the classifying space. Then $H^*(\Bdot G; \Z)$ 
+    Let $G$ be a Lie group, and $\Bdot G$ the classifying space. Then $H^*(\Bdot G; \underline{\Z})$ 
     are the characteristic classes of $G$. Similiarly, $H^*(\Bdot G; \Z(n))$ are differential 
-    characeteristic classes of $G$. \pause \vspace{5mm}
+    characetristic classes of $G$. \pause \vspace{5mm}
 
     We will  need the following key fact:
-    \begin{theorem}[Bott]
+    \begin{theorem}[Bott, Freed-Hopkins]
         $H^4(\Bdot\GL_1^+(\R); \Z(2)) \simeq \R$.
-    \end{theorem}
+    \end{theorem} \pause \vspace{5mm}
+
+    They are the differential first Pontryagin classes.
 \end{frame}
 
 
@@ -286,14 +301,14 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
     we want a $\R$ family in $H^3(\Bdot\Diff, \Z(1))$. We get this by pullback and integration: \pause 
 
     \vspace{5mm} 
-    Consider the canonical $\Diff$ action on $S^1$, note that 
+    Consider the canonical $\Diff$ action on $S^1$, note that \pause
     \begin{itemize}
         \item <1 -> The quotient $S^1/\Diff$ has a map to $\Bdot\Diff = * /\Diff$.
         Since the action of $\Diff$ on $S^1$ is orientation preserving, this is a oriented 
-        $S^1$ fiber bundle.
+        $S^1$ fiber bundle. \pause
         \item <2 -> The tangent bundle of $S^1$ gives a map $TS^1: S^1 \to \Bdot\GL^+_1(\R)$. Since
         the action of $\Diff$ on $S^1$ is smooth, the tangent bundle is $\Diff$-equivariant. Equivalently,
-        the tangent bundle factors through the quotient as a map $TS^1: S^1/\Diff \to B\GL^+_1(\R)$.
+        the tangent bundle factors through the quotient as a map $TS^1: S^1/\Diff \to \Bdot \GL^+_1(\R)$.
     \end{itemize}
 \end{frame}
 
@@ -305,7 +320,7 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
         \begin{tikzcd}
         S^1/\Diff \arrow[r, "TS^1"] \arrow[d]
         & \Bdot\GL^+_1(\R) \\
-        \Bdot\Gamma.
+        \Bdot\Diff.
         & 
         \end{tikzcd}
         \end{equation}
@@ -317,7 +332,7 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
         \begin{tikzcd}
         H^4(S^1/\Diff; \Z(2))  \arrow[d, "\int_{S^1}"]
         & H^4(\Bdot \GL^+_1(\R); \Z(2)) \arrow[l]\\
-        H^3(\Bdot\Gamma; \Z(1)).
+        H^3(\Bdot\Diff; \Z(1)).
         & 
         \end{tikzcd}
         \end{equation} 
@@ -328,10 +343,10 @@ for $\gamma_1, \gamma_2 \in \Diff$, viewed as morphisms $S^1 \to S^1$.
     Finally, we can state the conjecture of Freed and Hopkins that we proved: \vspace{5mm}
     \begin{theorem}[Y.L., Arun Debray, Christoph Weis]
         The image of map $\R \simeq H^4(\Bdot \GL^+_1(\R); \Z(2)) \to H^3(\Bdot\Diff; \Z(1))$
-        are the Virasoro central extensions $\tGam_\lambda$.
+        are the Virasoro central extensions $\Vir_\lambda$.
     \end{theorem}
 
-    \vspace{5mm} Furthermore, we explicitly recovers the Bott-Thurston cocylces when considering the 
+    \vspace{5mm} Furthermore, we explicitly recovers the Bott-Thurston cocylces when calculating the 
     map on cocycles.
 \end{frame}
 
